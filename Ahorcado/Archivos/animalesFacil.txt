@@ -1,0 +1,5 @@
+PERRO,
+GATO,
+RATON,
+VACA,
+OSO
