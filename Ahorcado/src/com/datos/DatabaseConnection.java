@@ -36,9 +36,6 @@ public class DatabaseConnection {
 		}	
 	}
 	
-	
-	
-	
 	public boolean checkConnection()
 	{
 		try
@@ -57,25 +54,28 @@ public class DatabaseConnection {
 	
 	public void close()
 	{
-		try 
-		{
-			this.conn.close();
-		} 
-		catch (SQLException e)
-		{
-			JOptionPane.showMessageDialog(null, e.getMessage(), "Failed to Close", JOptionPane.ERROR_MESSAGE);
-		}
-		finally
+		if(conn != null)
 		{
 			try 
 			{
-				this.finalize();
-			}
-			catch (Throwable e)
+				this.conn.close();
+			} 
+			catch (SQLException e)
 			{
 				JOptionPane.showMessageDialog(null, e.getMessage(), "Failed to Close", JOptionPane.ERROR_MESSAGE);
 			}
-		}
+			finally
+			{
+				try 
+				{
+					this.finalize();
+				}
+				catch (Throwable e)
+				{
+					JOptionPane.showMessageDialog(null, e.getMessage(), "Failed to Close", JOptionPane.ERROR_MESSAGE);
+				}
+			}//try to finalize the method for this class once not used.
+		}//check first if the connection is open
 	}//ends close method
 	
 }//ends class
